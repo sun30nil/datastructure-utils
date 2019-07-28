@@ -65,3 +65,24 @@ I've tried to make the design as self explanatory as possible and below will ans
 5) have the ability to reprocess historical data in case of bugs in the processing logic.
 
     * We've a backup reprocessing Compute facility we can be run on need basis by a consumer group - setting the offset to the required time.
+    
+    
+### Centralized Logging:
+ELK (open source), Splunk (enterprise/paid), Cloudwatch
+
+### Development:
+Springboot - Java 11 
+Containerization 
+IntelliJ
+
+### Alerting:
+Granfana, PagerDuty, Cloudwatch
+
+### Monitoring:
+Grafana (InfluxDB), Opentracing
+
+### CI/CD:
+GIT, Jenkins
+
+### Agile:
+Jira
