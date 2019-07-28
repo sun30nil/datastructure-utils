@@ -32,3 +32,4 @@ To ensure all the tests run successfully, run below command
 
 # Analytics Backend System Design
 
+![alt text](https://github.com/sun30nil/datastructure-utils/blob/master/AnalyticsAppArchitecture.png)
