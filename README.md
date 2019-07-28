@@ -33,3 +33,35 @@ To ensure all the tests run successfully, run below command
 # Analytics Backend System Design
 
 ![alt text](https://github.com/sun30nil/datastructure-utils/blob/master/AnalyticsAppArchitecture.png)
+
+I've tried to make the design as self explanatory as possible and below will answer the system design needs:
+
+1) handle large write volume: Billions write events per day.
+
+    * Each user's metric is sent to his specific availability zone, so the traffic is distributed there.
+    * Microservice based design of API service enables distributing the load of api requests and can be scaled horizontally.
+    * Each microserivce dumps metrics to specific topic in kafka.
+    * Each consumer group aggregates data on their topics and saves to a Redis making first level of aggregation.
+    * The aggregator then scheduled to aggregate data from redis to Cassandra.
+    * Cassandra is very scalable with Availabilty and Partition Tolerance and consistency can be tuned via replication factor.
+    * Further there's scheduled aggregator which run and aggregate hourly, daily data to S3 so that long period reporting becomes fast.
+    * Data Retention period of these datastores can be set accordinly as per paid v/s unpaid customers.
+
+2) handle large read/query volume: Millions merchants want to get insight about their business. Read/Query patterns are time-series related metrics.
+
+    * Redis + Cassandra is answer for realtime metrics 
+    * Scheduled Aggregators + Cassandra for near realtime and time based report generation
+
+3) provide metrics to customers with at most one hour delay.
+
+    * Scheduled Aggregators + Cassandra + S3 will solve this.
+
+4) run with minimum downtime.
+
+    * Cassandra is highly available (masterless model)
+    * Redis is single master so we have a backup redis instance (can be handled using Hystrix)
+    * Kafka is highly available but if goes down, we can have rabbitmq as backup queuing system
+
+5) have the ability to reprocess historical data in case of bugs in the processing logic.
+
+    * We've a backup reprocessing Compute facility we can be run on need basis by a consumer group - setting the offset to the required time.
