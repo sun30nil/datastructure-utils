@@ -28,3 +28,7 @@ To ensure all the tests run successfully, run below command
 3. Dequeue is O(N) in worst case since ref to first inserted item to queue is held as head and when thats empty we need reverse the tail queue to head LinkedList
 4. Implementation ref: ```com.sunil.ds.immutable.queue.FastImmutableQueue```
 5. Unit tests:  ```com.sunil.ds.immutable.queue.FastImmutableQueueTest```
+
+
+# Analytics Backend System Design
+
