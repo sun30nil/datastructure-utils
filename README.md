@@ -12,7 +12,7 @@ Change to the java project directory
 
 ```cd dscollection```
 
-To ensure all the tests run successfully, run below command
+To ensure all the tests run successfully (100% Coverage), run below command
 
 ```mvn clean test```
 ### Brute-Force Implementation:
