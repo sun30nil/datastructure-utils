@@ -25,14 +25,14 @@ public final class ImmutableQueue<T> implements Queue<T> {
   }
 
   @Override
-  public Queue<T> enQueue(T t) {
+  public final Queue<T> enQueue(T t) {
     List<T> tempLl = new LinkedList<>(this.linkedList);
     ((LinkedList<T>) tempLl).addLast(t);
     return new ImmutableQueue(tempLl);
   }
 
   @Override
-  public Queue<T> deQueue() {
+  public final Queue<T> deQueue() {
     if (this.isEmpty()) {
       throw new InvalidOperationException("Cannot dequeue an already empty queue.");
     }
@@ -42,7 +42,7 @@ public final class ImmutableQueue<T> implements Queue<T> {
   }
 
   @Override
-  public T head() {
+  public final T head() {
     if (this.isEmpty()) {
       throw new InvalidOperationException("Cannot get head of an already empty queue.");
     }
@@ -50,7 +50,7 @@ public final class ImmutableQueue<T> implements Queue<T> {
   }
 
   @Override
-  public boolean isEmpty() {
+  public final boolean isEmpty() {
     return this.linkedList.isEmpty();
   }
 }
